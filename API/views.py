@@ -6,7 +6,7 @@ from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
 from django.contrib.auth import authenticate
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 
@@ -42,5 +42,6 @@ class TestimonailViewSet(viewsets.ModelViewSet):
     serializer_class = TestimonailSerializer
 
 class ContactViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = ContactUs.objects.all()
     serializer_class = ContactSerializer
